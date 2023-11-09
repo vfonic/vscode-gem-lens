@@ -9,15 +9,11 @@ import { AbstractHoverProvider } from "@/hover";
 
 export function activate(context: vscode.ExtensionContext): void {
   vscode.commands.registerCommand(`${EXT_ID}.enableCodeLens`, () => {
-    void vscode.workspace
-      .getConfiguration(EXT_ID)
-      .update(ENABLE_CODE_LENS_KEY, true, true);
+    void vscode.workspace.getConfiguration(EXT_ID).update(ENABLE_CODE_LENS_KEY, true, true);
   });
 
   vscode.commands.registerCommand(`${EXT_ID}.disableCodeLens`, () => {
-    void vscode.workspace
-      .getConfiguration(EXT_ID)
-      .update(ENABLE_CODE_LENS_KEY, false, true);
+    void vscode.workspace.getConfiguration(EXT_ID).update(ENABLE_CODE_LENS_KEY, false, true);
   });
 
   // for Gemspec
@@ -27,18 +23,10 @@ export function activate(context: vscode.ExtensionContext): void {
     scheme: "file",
   };
 
-  context.subscriptions.push(
-    vscode.languages.registerHoverProvider(
-      gemspecFile,
-      new AbstractHoverProvider(gemspecRegexp, gemspecMapper)
-    )
-  );
+  context.subscriptions.push(vscode.languages.registerHoverProvider(gemspecFile, new AbstractHoverProvider(gemspecRegexp, gemspecMapper)));
 
   context.subscriptions.push(
-    vscode.languages.registerCodeLensProvider(
-      gemspecFile,
-      new AbstractCodeLensProvider(gemspecRegexp, gemspecMapper)
-    )
+    vscode.languages.registerCodeLensProvider(gemspecFile, new AbstractCodeLensProvider(gemspecRegexp, gemspecMapper))
   );
 
   // for Gemfile
@@ -46,17 +34,9 @@ export function activate(context: vscode.ExtensionContext): void {
     pattern: "**/Gemfile",
     scheme: "file",
   };
+  context.subscriptions.push(vscode.languages.registerHoverProvider(gemfileFile, new AbstractHoverProvider(gemfileRegexp, gemfileMapper)));
   context.subscriptions.push(
-    vscode.languages.registerHoverProvider(
-      gemfileFile,
-      new AbstractHoverProvider(gemfileRegexp, gemfileMapper)
-    )
-  );
-  context.subscriptions.push(
-    vscode.languages.registerCodeLensProvider(
-      gemfileFile,
-      new AbstractCodeLensProvider(gemfileRegexp, gemfileMapper)
-    )
+    vscode.languages.registerCodeLensProvider(gemfileFile, new AbstractCodeLensProvider(gemfileRegexp, gemfileMapper))
   );
 
   // for Gemfile.lock
@@ -65,10 +45,7 @@ export function activate(context: vscode.ExtensionContext): void {
     scheme: "file",
   };
   context.subscriptions.push(
-    vscode.languages.registerHoverProvider(
-      gemfileLockFile,
-      new AbstractHoverProvider(gemfileLockRegexp, gemfileLockMapper)
-    )
+    vscode.languages.registerHoverProvider(gemfileLockFile, new AbstractHoverProvider(gemfileLockRegexp, gemfileLockMapper))
   );
 }
 

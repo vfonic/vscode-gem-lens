@@ -9,10 +9,8 @@ import { extractDependency } from "@/utils";
 export class AbstractCodeLensProvider implements vscode.CodeLensProvider {
   private codeLenses: vscode.CodeLens[] = [];
 
-  private _onDidChangeCodeLenses: vscode.EventEmitter<void> =
-    new vscode.EventEmitter<void>();
-  public readonly onDidChangeCodeLenses: vscode.Event<void> =
-    this._onDidChangeCodeLenses.event;
+  private _onDidChangeCodeLenses: vscode.EventEmitter<void> = new vscode.EventEmitter<void>();
+  public readonly onDidChangeCodeLenses: vscode.Event<void> = this._onDidChangeCodeLenses.event;
 
   private regexp: RegExp;
   private mapper: (s: string) => Dependency | undefined;
@@ -26,15 +24,10 @@ export class AbstractCodeLensProvider implements vscode.CodeLensProvider {
     });
   }
 
-  public async provideCodeLenses(
-    document: vscode.TextDocument,
-    _token: vscode.CancellationToken
-  ) {
+  public async provideCodeLenses(document: vscode.TextDocument, _token: vscode.CancellationToken) {
     this.codeLenses = [];
 
-    const enabled = vscode.workspace
-      .getConfiguration(EXT_ID)
-      .get(ENABLE_CODE_LENS_KEY, true);
+    const enabled = vscode.workspace.getConfiguration(EXT_ID).get(ENABLE_CODE_LENS_KEY, true);
 
     if (!enabled) {
       return this.codeLenses;

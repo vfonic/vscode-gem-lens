@@ -6,11 +6,7 @@ export function quoteMapper(line: string): string {
   return line.slice(start);
 }
 
-export function extractDependency(
-  line: string,
-  fn: (s: string) => Dependency | undefined,
-  minLength = 2
-): Dependency | undefined {
+export function extractDependency(line: string, fn: (s: string) => Dependency | undefined, minLength = 2): Dependency | undefined {
   const dep = fn(line);
   if (!dep) {
     return undefined;

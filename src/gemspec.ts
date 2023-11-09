@@ -1,8 +1,7 @@
 import { Dependency } from "@/types";
 import { quoteMapper } from "@/utils";
 
-export const gemspecRegexp =
-  /\b\w+\.(add_development_dependency|add_runtime_dependency|add_dependency)/;
+export const gemspecRegexp = /\b\w+\.(add_development_dependency|add_runtime_dependency|add_dependency)/;
 
 export function gemspecMapper(line: string): Dependency | undefined {
   const mapped = quoteMapper(line);

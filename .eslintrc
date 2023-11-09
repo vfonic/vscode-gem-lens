@@ -1,12 +1,5 @@
 {
   "root": true,
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": "./tsconfig.json",
-    "tsconfigRootDir": ".",
-    "ecmaVersion": 6,
-    "sourceType": "module"
-  },
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -15,12 +8,16 @@
     "plugin:jest/recommended",
     "prettier"
   ],
-  "plugins": ["@typescript-eslint", "jest", "simple-import-sort", "prettier"],
+  "plugins": ["prettier", "@typescript-eslint", "jest", "simple-import-sort"],
   "rules": {
-     "@typescript-eslint/semi": "warn",
-    "curly": "warn",
-    "eqeqeq": "warn",
-    "no-throw-literal": "warn",
+    "@typescript-eslint/no-unused-expressions": "error",
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/semi": "error",
+    "@typescript-eslint/naming-convention": ["error", { "selector": "class", "format": ["PascalCase"] }],
+    "curly": ["error", "multi-line"],
+    "eqeqeq": "error",
+    "no-duplicate-imports": "error",
+    "no-throw-literal": "error",
     "prettier/prettier": "error",
     "semi": "off",
     "simple-import-sort/exports": "error",
