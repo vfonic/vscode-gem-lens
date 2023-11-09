@@ -1,13 +1,12 @@
 import Axios from "axios";
-import { setupCache } from "axios-cache-interceptor";
+// import { setupCache } from "axios-cache-interceptor";
+import * as vscode from "vscode";
 
 import { Gem } from "@/types";
 
-const api = Axios.create({
-  baseURL: "https://rubygems.org",
-});
+const api = Axios.create({ baseURL: "https://rubygems.org" });
 
-setupCache(api);
+// setupCache(api);
 
 export async function getGem(name: string) {
   const path = `/api/v1/gems/${name}.json`;
@@ -16,9 +15,10 @@ export async function getGem(name: string) {
     if (res.status === 200) {
       return res.data;
     }
-  } catch (_) {
-    return undefined;
+  } catch (error) {
+    vscode.window.showErrorMessage("Error fetching gem info: " + error.message);
+    return;
   }
 
-  return undefined;
+  return;
 }

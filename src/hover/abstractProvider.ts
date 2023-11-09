@@ -27,7 +27,6 @@ export class AbstractHoverProvider implements vscode.HoverProvider {
     }
 
     const gem = await getGem(dependency.name);
-
     if (gem === undefined) {
       return;
     }
